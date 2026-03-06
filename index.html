@@ -3,169 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>個人履歷 | Data Analyst & Engineer</title>
+    <title>Data Professional Portfolio | 資料專家履歷</title>
     <style>
         :root {
-            --primary: #0078d4; /* Power BI / SQL 常用藍色系 */
-            --accent: #35ad68;  /* Python 標誌綠色系 */
-            --bg: #f4f7f9;
-            --text: #333;
-            --card-bg: #ffffff;
+            --primary: #2563eb; /* 專業藍 */
+            --secondary: #64748b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --python: #3776ab;
+            --powerbi: #f2c811;
+            --sql: #cc2927;
         }
 
         body {
-            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Inter', 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: var(--card-bg);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
+        /* 導覽列 */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: flex;
-            flex-wrap: wrap;
-        }
-
-        /* 左側欄位 */
-        .sidebar {
-            flex: 1;
-            min-width: 300px;
-            background-color: #2c3e50;
-            color: white;
-            padding: 40px;
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            background: #7f8c8d;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 50px;
+            padding: 1rem 0;
         }
 
-        .sidebar h2 { border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-top: 30px; }
-        .contact-info p { font-size: 0.9em; margin: 10px 0; }
-
-        /* 右側主內容 */
-        .main-content {
-            flex: 2;
-            min-width: 400px;
-            padding: 40px;
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        header h1 { margin: 0; color: var(--primary); font-size: 2.5em; }
-        header p { font-size: 1.2em; color: #666; margin-top: 5px; }
+        nav a:hover { color: var(--primary); }
 
-        .section { margin-bottom: 30px; }
+        /* 英雄區塊 */
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; color: #94a3b8; }
+
+        /* 作品集區塊 */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
         .section-title {
-            font-size: 1.5em;
-            color: var(--primary);
-            border-bottom: 2px solid #eee;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 50px;
+            height: 4px;
+            background: var(--primary);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        /* 技能標籤 */
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill-tag {
-            background: #e1ecf4;
-            color: #39739d;
-            padding: 5px 15px;
-            border-radius: 20px;
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project-card:hover { transform: translateY(-10px); }
+
+        .project-header {
+            height: 8px;
+        }
+
+        .project-content { padding: 25px; }
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
             font-weight: bold;
-            font-size: 0.9em;
+            color: white;
+            margin-bottom: 10px;
+            display: inline-block;
         }
 
-        .experience-item { margin-bottom: 20px; }
-        .experience-item h4 { margin: 0; color: #444; }
-        .date { font-size: 0.85em; color: #888; margin-bottom: 8px; }
+        .project-title { font-size: 1.25rem; font-weight: bold; margin: 10px 0; }
+        .project-desc { color: #64748b; font-size: 0.95rem; margin-bottom: 20px; }
 
-        @media (max-width: 768px) {
-            .container { flex-direction: column; margin: 0; }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
         }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        /* 技術配色 */
+        .bg-python { background-color: var(--python); }
+        .bg-sql { background-color: var(--sql); }
+        .bg-powerbi { background-color: var(--powerbi); color: #000 !important; }
+        .bg-dax { background-color: #22c55e; }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <aside class="sidebar">
-        <div class="profile-img">👤</div>
-        <center><h2>個人資料</h2></center>
-        <div class="contact-info">
-            <p>📧 Email: yourname@example.com</p>
-            <p>🔗 LinkedIn: linkedin.com/in/yourname</p>
-            <p>💻 GitHub: github.com/yourname</p>
-            <p>📍 地點: 台灣，台北市</p>
-        </div>
+    <nav>
+        <a href="#home">首頁</a>
+        <a href="#projects">專案作品</a>
+        <a href="#about">關於我</a>
+    </nav>
 
-        <h2>核心技術</h2>
-        <div class="skill-tags">
-            <span class="skill-tag">SQL Server</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">DAX</span>
-            <span class="skill-tag">ETL Pipeline</span>
-            <span class="skill-tag">Data Modeling</span>
-        </div>
-    </aside>
+    <section class="hero" id="home">
+        <h1>我是 [您的姓名]</h1>
+        <p>資料分析師 | 資料工程師 | 數據驅動決策者</p>
+    </section>
 
-    <main class="main-content">
-        <header>
-            <h1>您的姓名</h1>
-            <p>資料分析師 | 資料工程師 (Data Analyst / Engineer)</p>
-        </header>
-
-        <section class="section">
-            <div class="section-title">關於我</div>
-            <p>
-                熱衷於從數據中挖掘價值，擅長使用 <b>Python</b> 進行自動化數據抓取與清洗，並透過 <b>SQL Server</b> 管理大型資料庫架構。
-                具備強大的 <b>Power BI</b> 視覺化能力，能利用 <b>DAX</b> 建立複雜的計算邏輯，將枯燥的數字轉化為具備商業洞察的決策儀表板。
-            </p>
-        </section>
-
-        <section class="section">
-            <div class="section-title">工作經歷</div>
+    <div class="container" id="projects">
+        <h2 class="section-title">精選作品集</h2>
+        
+        <div class="portfolio-grid">
             
-            <div class="experience-item">
-                <h4>資深數據分析師 | 某科技公司</h4>
-                <div class="date">2022/01 - 至今</div>
-                <ul>
-                    <li>負責 SQL Server 資料倉儲的維護與查詢效能優化。</li>
-                    <li>使用 Python 建立自動化 ETL 流程，減少 40% 手工處理時間。</li>
-                    <li>開發公司級 Power BI 報表，透過 DAX 函數實現動態銷售預測。</li>
-                </ul>
+            <div class="project-card">
+                <div class="project-header bg-sql"></div>
+                <div class="project-content">
+                    <span class="tag bg-sql">SQL Server</span>
+                    <div class="project-title">電商資料庫架構優化</div>
+                    <p class="project-desc">設計並實作 T-SQL 預存程序 (Stored Procedures)，優化百萬級數據查詢效能，提升處理速度 35%。</p>
+                    <a href="#" class="btn">查看 GitHub</a>
+                </div>
             </div>
 
-            <div class="experience-item">
-                <h4>資料工程師 | 某金融機構</h4>
-                <div class="date">2020/06 - 2021/12</div>
-                <ul>
-                    <li>建構與管理自動化網頁爬蟲，定期抓取市場財經數據。</li>
-                    <li>設計高效能資料表結構，處理每日百萬級別的交易紀錄。</li>
-                </ul>
+            <div class="project-card">
+                <div class="project-header bg-python"></div>
+                <div class="project-content">
+                    <span class="tag bg-python">Python</span>
+                    <div class="project-title">自動化金融爬蟲與清洗</div>
+                    <p class="project-desc">使用 Pandas 與 BeautifulSoup 抓取每日股市行情，並透過 NumPy 進行資料清洗與異常值檢測。</p>
+                    <a href="#" class="btn">查看程式碼</a>
+                </div>
             </div>
-        </section>
 
-        <section class="section">
-            <div class="section-title">教育背景</div>
-            <div class="experience-item">
-                <h4>資訊管理學系 碩士/學士</h4>
-                <div class="date">某某大學 | 2016 - 2020</div>
+            <div class="project-card">
+                <div class="project-header bg-powerbi"></div>
+                <div class="project-content">
+                    <span class="tag bg-powerbi">Power BI</span>
+                    <div class="project-title">全球銷售戰情室儀表板</div>
+                    <p class="project-desc">整合多維度資料來源，建立視覺化看板，提供高層管理者即時監控年度目標達成率。</p>
+                    <a href="#" class="btn">觀看 Demo</a>
+                </div>
             </div>
-        </section>
-    </main>
-</div>
+
+            <div class="project-card">
+                <div class="project-header bg-dax"></div>
+                <div class="project-content">
+                    <span class="tag bg-dax">DAX</span>
+                    <div class="project-title">時間序列與同環比分析</div>
+                    <p class="project-desc">利用 DAX 時間智慧函數實作 YoY/MoM 計算與動態篩選，深入分析客戶流失率與回購行為。</p>
+                    <a href="#" class="btn">了解技術细节</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer id="about">
+        <p>© 2026 [您的姓名] - 專注於將數據轉化為洞察力</p>
+        <p>Email: contact@yourname.com | LinkedIn: /in/yourprofile</p>
+    </footer>
 
 </body>
 </html>
