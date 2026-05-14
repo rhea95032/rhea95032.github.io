@@ -158,6 +158,19 @@
         /* 技術配色 */
         .bg-powerbi { background-color: var(--powerbi); color: #000 !important; }
         .bg-PowerPoint { background-color: #D04423; color:#ffffff !important; }
+        /* 影片版面 */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+        
     </style>
 </head>
 <body>
@@ -289,6 +302,18 @@
         </div>
     </div>
 
+    <div class="video-container" style="margin: 20px 0; text-align: center;">
+        <h3>📊 專題簡報影片</h3>
+        <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/sLT7soPSgIA" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
 
     <footer id="about">
         <p>© 2026 鄭朝元 - 專注於將數據轉化為洞察力</p>
